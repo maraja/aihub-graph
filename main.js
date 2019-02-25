@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  var test = true;
+  var test = false;
   var easter = false;
 
   var nodes = [];
