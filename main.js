@@ -43,9 +43,9 @@ $(document).ready(function() {
     var node_to = add_edge_form.edge_to.value;
 
     if (!!!node_to || !!!node_from) alert("incomplete form");
-    // node_from = "";
-    node_to = "";
     rebuildEdges(node_from, node_to);
+    // node_from.value = "";
+    node_to = "";
     // console.log(person);
   });
 
