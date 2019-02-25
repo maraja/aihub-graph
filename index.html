@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>AI Hub Relationship Graph</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- stylesheets -->
+
+    <!--
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+	 crossorigin="anonymous">
+	-->
+
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+
+    <!-- scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.3.3/cytoscape.min.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+      integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+      integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/gh/nicolaspanel/numjs@0.15.1/dist/numjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <script src="main.js"></script>
+  </head>
+
+  <body>
+    <p class="c">
+      <img
+        src="images/AIHUB-DC-BACK-COLOUR.png"
+        class="ai"
+        alt="durham college ai hub logo"
+      />
+    </p>
+
+    <form class="form-horizontal c" name="add_node" action="#">
+      <div class="form-group">
+        <label class="control-label col-sm-4" for="name">Name:</label>
+        <div class="col-sm-12">
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            placeholder="Enter name"
+          />
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-12 text-right">
+          <button class="button" style="vertical-align:middle" type="submit">
+            <span>Submit </span>
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <form class="form-horizontal c pt" name="add_edge" action="#">
+      <div class="form-group">
+        <label class="control-label col-sm-4" for="edge_from"
+          >Relationship From:</label
+        >
+        <div class="col-sm-12">
+          <input
+            type="text"
+            class="form-control"
+            id="edge_from"
+            placeholder="Relationship From:"
+          />
+        </div>
+        <label class="control-label col-sm-4" for="edge_to"
+          >Relationship To:</label
+        >
+        <div class="col-sm-12">
+          <input
+            type="text"
+            class="form-control"
+            id="edge_to"
+            placeholder="Relationship To:"
+          />
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-12 text-right">
+          <button class="button" style="vertical-align:middle" type="submit">
+            <span>Submit </span>
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <div class="col-sm-12 text-right c">
+      <button
+        class="button2"
+        type="submit"
+        id="build-graph-btn"
+        style="vertical-align:middle"
+      >
+        <span>Build Graph </span>
+      </button>
+    </div>
+
+    <div id="nodelist"></div>
+
+    <div id="graph-stuff" style="display:none;">
+      <div id="graph"></div>
+
+      <form class="form-horizontal c pt" name="num_steps" action="#">
+        <div class="form-group">
+          <label class="control-label col-sm-4" for="steps">Steps:</label>
+          <div class="col-sm-12">
+            <input
+              type="text"
+              class="form-control"
+              id="steps"
+              placeholder="Steps"
+            />
+          </div>
+          <label class="control-label col-sm-4" for="person_from"
+            >Person From:</label
+          >
+          <div class="col-sm-12">
+            <input
+              type="text"
+              class="form-control"
+              id="person_from"
+              placeholder="Person Name"
+            />
+          </div>
+          <label class="control-label col-sm-4" for="person_to"
+            >Person To:</label
+          >
+          <div class="col-sm-12">
+            <input
+              type="text"
+              class="form-control"
+              id="person_to"
+              placeholder="Person Name"
+            />
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-12 text-right">
+            <button class="button" style="vertical-align:middle" type="submit">
+              <span>Submit </span>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <script></script>
+  </body>
+</html>
