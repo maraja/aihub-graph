@@ -156,6 +156,7 @@ $(document).ready(function() {
 
   function hideForms() {
     document.getElementById("build-graph-btn").style.display = "none";
+    nodelist.style.display = "none";
     add_node_form.style.display = "none";
     add_edge_form.style.display = "none";
   }
