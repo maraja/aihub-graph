@@ -166,11 +166,17 @@ $(document).ready(function() {
     document.getElementById("graph-stuff").style.display = "block";
     var elements = [];
     Object.keys(adjacency_list).forEach(name => {
+      var degree = 0;
+      // find the in-degree for the node.
+      for (var key in adjacency_list) {
+        degree += adjacency_list[key].filter(n => n == name).length
+      }
       elements.push({
         data: {
           id: name,
           score: adjacency_list[name].length,
-          size: (adjacency_list[name].length + 1) * 15
+          // add the in-degree to the out degree
+          size: (adjacency_list[name].length + degree + 1) * 12
         }
       });
       adjacency_list[name].forEach(edge => {
@@ -265,9 +271,11 @@ $(document).ready(function() {
     // turn off zoom
     cy.zoomingEnabled(false);
 
-    calculateBetweenness(cy, "amit");
-    calculateCloseness(cy, "amit");
-    calulateDegreeCentrality(cy, "amit");
+    // calculateBetweenness(cy, "amit");
+    // calculateCloseness(cy, "amit");
+    // calulateDegreeCentrality(cy, "amit");
+
+
     var [
       listObject,
       adjacencyMatrix,
@@ -279,6 +287,29 @@ $(document).ready(function() {
       "Opportunities from amit to veronica with 3 steps:",
       getNumberOfSteps(adjacencyMatrix, 3, "amit", "veronica", name_to_index)
     );
+
+
+    var influentialPerson="", popularPerson = "";
+    var influentialPersonBetweenness=0, popularPersonCentrality = 0;
+    Object.keys(name_to_index).forEach(person => {
+      if (calculateBetweenness(cy, person) > influentialPersonBetweenness) {
+        influentialPerson = person;
+        influentialPersonBetweenness = calculateBetweenness(cy, person);
+      }
+      if (calulateDegreeCentrality(cy, person) > popularPersonCentrality) {
+        popularPerson = person;
+        popularPersonCentrality = calulateDegreeCentrality(cy, person);
+      }
+    })
+
+
+    $("#graph-stats").append($('<p/>', {
+      text: "Person with the highest betweenness: " + influentialPerson + " with a betweenness score of " + influentialPersonBetweenness
+    }))
+    $("#graph-stats").append($('<p/>', {
+      text: "Person with the highest degree centraility: " + popularPerson + " with a betweenness score of " + popularPersonCentrality
+    }))
+    // alert("the most influential person is " + influentialPerson + " with a betweenness score of " + influentialPersonBetweenness)
 
     // console.log(listObject);
     // console.table(adjacencyMatrix);
@@ -332,11 +363,9 @@ $(document).ready(function() {
       "Betweenness for",
       node,
       ":",
-      cy
-        .$()
-        .bc()
-        .betweenness("#" + node.toString())
+      cy.$().bc().betweenness("#" + node.toString())
     );
+    return cy.$().bc().betweenness("#" + node.toString())
   }
 
   function calculateCloseness(cy, node) {
@@ -355,6 +384,7 @@ $(document).ready(function() {
       ":",
       cy.$().dc({ root: "#" + node.toString() }).degree
     );
+    return cy.$().dc({ root: "#" + node.toString() }).degree;
   }
 
   // helpers

@@ -13,6 +13,14 @@ body {
 	background-color: #f5f9f8;	
 }
 
+#graph-stats {
+  margin: 200px 20%;
+  padding: 50px;
+  background: white;
+  border-radius: 25px;
+  box-shadow: 0px 8px 17px -7px #ccc;
+}
+
 .c {
 	text-align: center
 }
@@ -22,7 +30,13 @@ body {
 }
 
 img.ai {
-	padding-bottom: 40px;
+  padding-bottom: 40px;
+  padding: 75px;
+  height: 100px;
+  box-shadow: 0px 8px 17px -7px #ccc;
+  border-radius: 25px;
+  background: white;
+  margin-bottom: 100px;
 }
 
 input[type=text] {
